@@ -1,0 +1,279 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* General Page Styles */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    grid-template-areas: 
+      "sidebar main right-sidebar"
+      "sidebar main right-sidebar"
+      "sidebar footer footer";
+    min-height: 100vh;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sidebar Navigation */
+#sidebar {
+    grid-area: sidebar;
+    background-color: #1c1c1c;
+    padding: 30px 20px;
+    border-right: 3px solid #FFDA03;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: flex-start;
+}
+
+#sidebar nav ul {
+    list-style: none;
+    width: 100%;
+}
+
+#sidebar nav ul li {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+#sidebar nav ul li:not(:last-child)::after {
+    content: '';
+    display: block;
+    width: 90%;
+    height: 2px;
+    background: #FFDA03;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+}
+
+#sidebar nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+#sidebar nav ul li a:hover {
+    color: #FFDA03;
+}
+
+/* Main Content */
+#main-content {
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 50px;
+}
+
+/* Text Content */
+.home-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+}
+
+.home-content h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #777777;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.typing {
+    color: #FFDA03;
+    font-weight: bold;
+}
+
+.home-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 30px;
+    color: #aaaaaa;
+}
+
+/* Button Styling */
+.oval-button {
+    padding: 12px 40px;
+    border: 2px solid #FFDA03;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.oval-button:hover {
+    background-color: #FFDA03;
+    color: #121212;
+}
+
+/* Right Sidebar (Image Section) */
+#right-sidebar {
+    grid-area: right-sidebar;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Profile Image Container */
+.image-container {
+    width: 340px;  
+    height: 340px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ensuring the image is properly aligned */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Corner Framing Effect - Top Left and Bottom Right (Diagonally Reversed) */
+.image-container::before, 
+.image-container::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 4px solid #FFDA03;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(255, 218, 3, 0.6);
+    transform: rotate(45deg); /* Rotates the frames diagonally */
+}
+
+.image-container::before {
+    top: -8px;
+    left: -8px; /* Top-left corner */
+    border-right: none;
+    border-bottom: none;
+}
+
+.image-container::after {
+    bottom: -8px;
+    right: -8px; /* Bottom-right corner */
+    border-left: none;
+    border-top: none;
+}
+
+/* Footer */
+footer {
+    grid-area: footer;
+    background-color: #1c1c1c;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #e0e0e0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Animations & Interactions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.home-content, .image-container {
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "main"
+            "sidebar"
+            "right-sidebar"
+            "footer";
+    }
+    
+    #sidebar, #right-sidebar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        padding: 20px;
+    }
+
+    .image-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    #main-content {
+        padding: 30px;
+    }
+
+    .home-content h1 {
+        font-size: 36px;
+    }
+
+    .home-content h2 {
+        font-size: 24px;
+    }
+
+    .home-content p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "main"
+            "right-sidebar"
+            "sidebar"
+            "footer";
+        gap: 10px;
+    }
+
+    #sidebar, #right-sidebar {
+        padding: 10px;
+    }
+
+    .image-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .home-content h1 {
+        font-size: 28px;
+    }
+
+    .home-content h2 {
+        font-size: 20px;
+    }
+
+    .home-content p {
+        font-size: 14px;
+    }
+
+    .oval-button {
+        font-size: 16px;
+        padding: 10px 30px;
+    }
+}
